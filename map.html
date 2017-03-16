@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/ dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ og: http://ogp.me/ns# rdfs: http://www.w3.org/2000/01/rdf-schema# sioc: http://rdfs.org/sioc/ns# sioct: http://rdfs.org/sioc/types# skos: http://www.w3.org/2004/02/skos/core# xsd: http://www.w3.org/2001/XMLSchema#">
+<head>
+<meta charset="utf-8">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+
+<object id="svgObject" data="map2.svg" type="image/svg+xml" height="800px">
+Your browser doesn't support SVG
+</object>
+</body>
+<script>
+	$ = jQuery;
+	/*
+	document.getElementById("svg1").addEventListener("load", function() {
+    var doc = this.getSVGDocument();
+    var rect = doc.querySelector("rect"); // suppose our image contains a <rect>
+    rect.setAttribute("fill", "lime");
+    console.log(rect);
+    */
+    window.onload=function() {
+		// Get the Object by ID
+		var a = document.getElementById("svgObject");
+		// Get the SVG document inside the Object tag
+		var svgDoc = a.contentDocument;
+		// Get one of the SVG items by ID;
+		//var svgItem = svgDoc.getElementById("svgItem");
+		var svgItem = $(svgDoc).find('svg').find('g');
+		console.log(svgItem);
+		// Set the colour to something else
+		//svgItem.setAttribute("fill", "lime");
+		var rooms = $(svgItem[0]).find('rect');
+		console.log(rooms);
+		$(svgItem[0]).find('polyline').hide();
+		$(svgItem[1]).hide();
+		$(svgItem[2]).hide();
+		$(svgItem[3]).hide();
+		$(svgItem[4]).hide();
+		$(svgItem[5]).hide();
+		$(svgItem[6]).hide();
+		$(svgItem[9]).hide();
+		$(svgItem[10]).hide();
+		$(svgItem[11]).hide();
+
+		$(rooms[0]).click(function () {
+			$(svgItem[10]).fadeIn();
+		});
+	};
+
+
+
+</script>
+</html>
