@@ -152,7 +152,7 @@ a {
 </div>
 <div style="text-align:center">
 	<a href="index.html"><button type="button" class="btn btn-lg btn-primary">BACK TO MAIN PAGE</button></a>
-	<a href="map.html"><button type="button" class="btn btn-lg btn-primary">GO TO TODAY'S EVENT</button></a>
+	<a href="event.html"><button type="button" class="btn btn-lg btn-primary">GO TO TODAY'S EVENT</button></a>
 
 </div>
 
@@ -178,67 +178,77 @@ a {
 
     window.onload=function() {
 
-		// Get the Object by ID
-		var a = document.getElementById("svgObject");
-		// Get the SVG document inside the Object tag
-		var svgDoc = a.contentDocument;
-		// Get one of the SVG items by ID;
-		//var svgItem = svgDoc.getElementById("svgItem");
-		var svgItem = $(svgDoc).find('svg').find('g');
-		//console.log(svgItem);
-		// Set the colour to something else
-		//svgItem.setAttribute("fill", "lime");
-		var lineTo = {};
-		lineTo['lineToBar'] = $(svgItem[0]).find('polyline');
-		lineTo['lineToLumpini'] = $(svgItem[1]);
-		lineTo['lineToCrowne_5'] = $(svgItem[2]);
-		lineTo['lineToCrowne_4'] = $(svgItem[3]);
-		lineTo['lineToCrowne_3'] = $(svgItem[4]);
-		lineTo['lineToCrowne_2'] = $(svgItem[5]);
-		lineTo['lineToCrowne_1'] = $(svgItem[6]);
-		lineTo['lineToSaladaeng'] = $(svgItem[9]);
-		lineTo['lineToSilom'] = $(svgItem[10]).find('polyline');
-		lineTo['lineToSathorn'] = $(svgItem[11]);
+    	$(document).ready(function () {
+    		console.log('on ready');
 
-		var hideAllLine = function (lineTo) {
-			// Hide all navigator
-			$.each(lineTo, function(index, value) {
-				value.hide();
-			});
-		}
+			// Get the Object by ID
+			var a = document.getElementById("svgObject");
+			// Get the SVG document inside the Object tag
+			var svgDoc = a.contentDocument;
+			// Get one of the SVG items by ID;
+			//var svgItem = svgDoc.getElementById("svgItem");
+			var svgItem = $(svgDoc).find('svg').find('g');
 
-		hideAllLine(lineTo);
+			console.log(svgItem);
+			if (typeof svgItem[1] == "undefined") {
+				$('body').hide();
+				location.reload();
+			}
+			// Set the colour to something else
+			//svgItem.setAttribute("fill", "lime");
+			var lineTo = {};
+			lineTo['lineToBar'] = $(svgItem[0]).find('polyline');
+			lineTo['lineToLumpini'] = $(svgItem[1]);
+			lineTo['lineToCrowne_5'] = $(svgItem[2]);
+			lineTo['lineToCrowne_4'] = $(svgItem[3]);
+			lineTo['lineToCrowne_3'] = $(svgItem[4]);
+			lineTo['lineToCrowne_2'] = $(svgItem[5]);
+			lineTo['lineToCrowne_1'] = $(svgItem[6]);
+			lineTo['lineToSaladaeng'] = $(svgItem[9]);
+			lineTo['lineToSilom'] = $(svgItem[10]).find('polyline');
+			lineTo['lineToSathorn'] = $(svgItem[11]);
 
-		var roomsTmp = $(svgItem[0]).find('rect');
-		var roomsTmp2 = $(svgItem[0]).find('polygon');
-		var rooms = {};
-		rooms['Silom'] = roomsTmp[0];
-		rooms['Saladaeng'] = roomsTmp[1];
-		rooms['Sathorn'] = roomsTmp[2];
-		rooms['Crowne_1'] = roomsTmp[3];
-		rooms['Crowne_2'] = roomsTmp[4];
-		rooms['Crowne_3'] = roomsTmp[5];
-		rooms['Crowne_4'] = roomsTmp[6];
-		rooms['Crowne_5'] = roomsTmp[7];
-		rooms['Lumpini'] = roomsTmp2[1];
-		rooms['Bar'] = roomsTmp2[2];
-		
-		// Bind rooms click for show line		
-		$.each(rooms, function(index, value) {
-			$(rooms[index]).click(function () {
-				hideAllLine(lineTo);
-				lineTo['lineTo'+index].fadeIn(1000);
-			});
-		});
+			var hideAllLine = function (lineTo) {
+				// Hide all navigator
+				$.each(lineTo, function(index, value) {
+					value.hide();
+				});
+			}
 
-
-		// Trigger map click
-		var roomTrigger = getUrlParameter('room');
-		if (typeof roomTrigger !== "undefined") {
 			hideAllLine(lineTo);
-			lineTo['lineTo'+roomTrigger].fadeIn(1000);
-		}
 
+			var roomsTmp = $(svgItem[0]).find('rect');
+			var roomsTmp2 = $(svgItem[0]).find('polygon');
+			var rooms = {};
+			rooms['Silom'] = roomsTmp[0];
+			rooms['Saladaeng'] = roomsTmp[1];
+			rooms['Sathorn'] = roomsTmp[2];
+			rooms['Crowne_1'] = roomsTmp[3];
+			rooms['Crowne_2'] = roomsTmp[4];
+			rooms['Crowne_3'] = roomsTmp[5];
+			rooms['Crowne_4'] = roomsTmp[6];
+			rooms['Crowne_5'] = roomsTmp[7];
+			rooms['Lumpini'] = roomsTmp2[1];
+			rooms['Bar'] = roomsTmp2[2];
+			
+			// Bind rooms click for show line		
+			$.each(rooms, function(index, value) {
+				$(rooms[index]).click(function () {
+					hideAllLine(lineTo);
+					lineTo['lineTo'+index].fadeIn(1000);
+				});
+			});
+
+
+			// Trigger map click
+			var roomTrigger = getUrlParameter('room');
+			if (typeof roomTrigger !== "undefined") {
+				hideAllLine(lineTo);
+				lineTo['lineTo'+roomTrigger].fadeIn(1000);
+			}
+
+    	});
+		console.log('onload');
 	};
 
 
