@@ -18,6 +18,10 @@ body {
   padding-bottom: 20px;
   color: #9d0e6b;
 }
+a {
+  color: #9d0e6b;
+  text-decoration: underline;
+}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -112,7 +116,7 @@ body {
   .date {
 
   }
-  .row {
+  .row img {
     cursor: pointer;
   }
 }
@@ -140,7 +144,7 @@ body {
             <strong>ABC DINER</strong>
           </div>
           <div class="col-md-3">
-            <p><strong>METTING ROOM</strong></p>
+            <p><strong><a href="map.html?room=Lumpini">LUMPINI</a></strong></p>
             <p>Today </p>
             <p>Start 4:30pm - 10:00pm</p>
           </div>
@@ -159,7 +163,7 @@ body {
             <strong>CEO METTING</strong>
           </div>
           <div class="col-md-3">
-            <p><strong>CROWNE 5</strong></p>
+            <p><strong><a href="map.html?room=Crowne_5">CROWNE 5</a></strong></p>
             <p>10 Jan - 15 Jan</p>
             <p>Start 8:30am - 12:00am</p>
           </div>
@@ -171,6 +175,11 @@ body {
           </div>
         </div>
 
+      <div class="footer">
+      <a href="index.html"><button type="button" class="btn btn-lg btn-primary">BACK TO MAIN PAGE</button></a>
+      <a href="map.html"><button type="button" class="btn btn-lg btn-primary">GO TO HOTEL MAPS</button></a>
+        
+      </div>
 
     </div> <!-- /container -->
 
@@ -182,14 +191,14 @@ body {
   $(document).ready(function () {
 
 
-    $('#row2').click(function () {
+    $('#row2').find('img').click(function () {
       $('.row').removeClass('active');
       $(this).addClass('active');
 
       $('.img-main').hide();
       $('#img2').show();
     });
-    $('#row1').click(function () {
+    $('#row1').find('img').click(function () {
       $('.row').removeClass('active');
       $(this).addClass('active');
 
